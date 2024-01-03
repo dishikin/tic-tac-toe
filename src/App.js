@@ -24,9 +24,13 @@ function Board({ xIsNext, squares, onPlay }) {
     }
     const winner = calculateWinner(squares);
     let status;
+    const draw = checkDraw(squares)
+
     if (winner) {
         status = "Winner: " + winner;
-    } else {
+    } else if(draw) {
+        status = "It's a Draw"
+    }else {
         status = "Next Player: " + (xIsNext ? "X" : "O");
     }
 
@@ -145,4 +149,16 @@ function Board({ xIsNext, squares, onPlay }) {
     }
     return null;
   }
+
+  function checkDraw(squares) {
+    let draw = true;
+    for (let i = 0; i < squares.length; i++) {
+        if (squares[i] == null) {
+            console.log("square "+ i + ": " + squares[i])
+            draw = false;
+        }
+    }
+    console.log("checkDraw: " + draw)
+    return draw
+}
   
